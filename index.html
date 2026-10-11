@@ -1102,7 +1102,6 @@
     var nao = document.getElementById('upsell-nao');
     if (!modal || !abre) return;
 
-    var destinoBasico = abre.getAttribute('href');
     var ultimoFoco = null;
 
     function abrir(e) {
@@ -1138,7 +1137,9 @@
     // recusou o upgrade: segue para o checkout do plano basico
     if (nao) nao.addEventListener('click', function () {
       window.__indoParaCheckout = true;
-      window.location.href = destinoBasico;
+      // le o link NA HORA do clique: o UTMify acrescenta as UTMs depois que a pagina
+      // carrega, e o link guardado no carregamento ia para o checkout sem elas
+      window.location.href = abre.getAttribute('href');
     });
   })();
 
